@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SearchBar from '../components/search-bar';
+import VideoDetail from '../components/video-detail';
 import VideoList from './video-list';
 import axios from 'axios';
 
@@ -15,9 +16,12 @@ class App extends Component {
     }
 
     componentWillMount(){
+        this.initMovies();
+    }
+
+    initMovies(){
         axios.get(`${API_END_POINT}${POPULAR_MOVIE_URL}&${API_KEY}`).then((response) => {
-            this.setState({movieList:response.data.results.slice(1, 9)});
-            this.setState({currentMovie:response.data.results[0]});
+            this.setState({movieList:response.data.results.slice(1, 9), currentMovie:response.data.results[0]});
             console.log('------');
             console.log(this.state.currentMovie);
             console.log('------');
@@ -26,10 +30,16 @@ class App extends Component {
     }
 
     render(){
+        const RenderMovieList = () => {
+            if(this.state.movieList.length>=5){
+                return <VideoList movieList={this.state.movieList}/>
+            }
+        }
         return (
             <div>
                 <SearchBar/>
-                <VideoList/>
+                {RenderMovieList()}
+                <VideoDetail title={this.state.currentMovie.title} description={this.state.currentMovie.overview}/>
             </div>
         )
     }
