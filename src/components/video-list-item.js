@@ -2,11 +2,23 @@ import React from 'react';
 
 const IMG_BASE_URL="https://image.tmdb.org/t/p/w500/";
 
-const VideoListItem = ({movie}) => {
-    return  <li>
-                <img height="100px" src={`${IMG_BASE_URL}${movie.poster_path}`} />
-                <h3>{movie.title} </h3>
+const VideoListItem = (props) => {
+    const {movie} = props;
+    return  <li className="list-group-item" onClick={handelOnClick}>
+                <div className="media">
+                    <div className="media-left">
+                        <img className="media-object  img-rounded" height="100px" src={`${IMG_BASE_URL}${movie.poster_path}`} />
+                    </div>
+                    <div className="media-body">
+                        <h3 className="title_list_item">{movie.title}</h3>
+                    </div>
+                </div>
             </li>
+
+            function handelOnClick(){
+                 props.callback(movie);
+                 //console.log('movie', movie)
+            }
 }
 
 /*

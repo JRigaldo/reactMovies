@@ -7,17 +7,26 @@
      }
      render(){
         return (
-            <div>
-                <input onChange={this.handelChange.bind(this)} placeholder={this.state.placeholder}/>
-                <p>{this.state.searchText}</p>
+            <div className="row">21
+                <div className="col-md-8 input-group">
+                    <input onKeyUp={this.handleChange.bind(this)} type="text" className="form-control input-lg" onChange={this.handleChange.bind(this)} placeholder={this.state.placeholder}/>
+                    <span className="input-group-btn">
+                        <button className="btn btn-secondary" onClick={this.handleOnClick.bind(this)}>Go</button>
+                    </span>
+                </div>
             </div>
         )
      }
 
-     handelChange(event){
+     handleChange(event){
          // FAUX this.state.searchText = event.target.value; EST REMPLACE PAR => setState() !!!
          // console.log('Hello', event.target.value);
          this.setState({searchText: event.target.value});
+     }
+
+
+     handleOnClick(event){
+        this.props.callback(this.state.searchText);
      }
  }
 
