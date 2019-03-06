@@ -75,6 +75,20 @@ class App extends Component {
                 return <VideoList movieList={this.state.movieList} callback={this.onClickListItem.bind(this)}/>
             }
         }
+
+        const renderVideo = () => {
+            if(this.state.currentMovie.videoId){
+                return (
+                    <div>
+                        <Video videoTitle={this.state.currentMovie.title} videoId={this.state.currentMovie.videoId} description={this.state.currentMovie.overview} />
+                        <VideoDetail title={this.state.currentMovie.title} description={this.state.currentMovie.overview}/>
+                    </div>
+                    
+                )
+            }else{
+                return <div>Pas de données</div>
+            }
+        }
         return (
             <div>
                 <div className="search_bar">
@@ -82,8 +96,7 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className="col-md-8">
-                        <Video videoTitle={this.state.currentMovie.title} videoId={this.state.currentMovie.videoId} description={this.state.currentMovie.overview} />
-                        <VideoDetail title={this.state.currentMovie.title} description={this.state.currentMovie.overview}/>
+                        {renderVideo()}
                     </div>
                     <div className="col-md-4">
                         {RenderMovieList()}

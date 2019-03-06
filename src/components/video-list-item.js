@@ -7,7 +7,7 @@ const VideoListItem = (props) => {
     return  <li className="list-group-item" onClick={handelOnClick}>
                 <div className="media">
                     <div className="media-left">
-                        <img className="media-object  img-rounded" height="100px" src={`${IMG_BASE_URL}${movie.poster_path}`} />
+                        <img className="media-object  img-rounded" alt={Image.title} height="100px" src={`${IMG_BASE_URL}${movie.poster_path}`} />
                     </div>
                     <div className="media-body">
                         <h3 className="title_list_item">{movie.title}</h3>
